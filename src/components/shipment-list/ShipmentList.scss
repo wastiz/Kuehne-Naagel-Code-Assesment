@@ -1,0 +1,13 @@
+.shipment-list {
+    width: 90%;
+    height: auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    .labels {
+        width: 100%;
+        height: auto;
+        gap: 6%;
+    }
+}

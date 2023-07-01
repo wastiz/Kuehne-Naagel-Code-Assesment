@@ -1,11 +1,17 @@
 .app-info-div {
     width: 50%;
-    height: 300px;
-    background-color: #15A3EF;
+    height: auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    position: relative;
+    bottom: 100px;
+    z-index: 2;
     h2 {
-        color: white;
+        margin-left: 25px;
     }
     h3 {
-        color: white;
+        margin-left: 25px;
     }
 }

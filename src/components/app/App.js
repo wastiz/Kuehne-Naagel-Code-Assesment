@@ -1,8 +1,10 @@
-import './App.css';
+import './App.scss';
 import { Component} from 'react';
 import '../../services/ShipmentService';
 import ShipmentService from '../../services/ShipmentService';
 import AppInfo from '../app-info/AppInfo';
+import AddForm from '../add-form/AddForm';
+import ShipmentList from '../shipment-list/ShipmentList';
 
 
 class App extends Component {
@@ -15,10 +17,14 @@ class App extends Component {
 
   render() {
     return (
-      <>
-        <h1>Hello World</h1>
+      <div className='app'>
+        <header>
+          <h1>Kuehne-Naagel Shipment system</h1>
+        </header>
         <AppInfo/> 
-      </>
+        <AddForm/> 
+        <ShipmentList/>
+      </div>
     );
   }
 }
