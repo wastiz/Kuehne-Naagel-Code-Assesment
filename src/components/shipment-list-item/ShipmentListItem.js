@@ -1,17 +1,18 @@
 import './ShipmentListItem.scss';
 
-function ShipmentListItem() {
+function ShipmentListItem(props) {
+    const {orderNo, date, customer, consignee, trackingNo, status, onDelete} = props;
     return (
-        <div className="shipment-list-item row">
-            <p>test</p>
-            <p>test</p>
-            <p>test</p>
-            <p>test</p>
-            <p>test</p>
-            <p>test</p>
+        <li className="shipment-list-item row">
+            <p>{orderNo}</p>
+            <p>{date}</p>
+            <p>{customer}</p>
+            <p>{consignee}</p>
+            <p>{trackingNo}</p>
+            <p>{status}</p>
             <button>update</button>
-            <button>delete</button>
-        </div>
+            <button onClick={onDelete}>delete</button>
+        </li>
     )
 }
 

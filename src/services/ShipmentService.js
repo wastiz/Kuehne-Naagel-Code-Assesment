@@ -1,5 +1,5 @@
 class ShipmentService {
-    url = 'https://my.api.mockaroo.com/shipments.json?key=5e0b62d0';
+    url = '../Shipments.txt';
 
     getResource = async () => {
         let res = await fetch(this.url);
@@ -11,7 +11,7 @@ class ShipmentService {
     }
 
     getAllShipments = async () => {
-        const res = await this.getResource(this.url);
+        const res = await this.getResource(this.url)
         return res
     }
 }
