@@ -1,7 +1,7 @@
 import './App.scss';
 import { useState, useEffect } from 'react';
-import '../../services/ShipmentService';
-import ShipmentServiceTxt from '../../services/ShipmentServiceTxt';
+//import ShipmentServiceTxt from '../../services/ShipmentServiceTxt';
+import ShipmentService from '../../services/ShipmentService';
 import AppInfo from '../app-info/AppInfo';
 import AddForm from '../add-form/AddForm';
 import ShipmentList from '../shipment-list/ShipmentList';
@@ -9,22 +9,23 @@ import ShipmentList from '../shipment-list/ShipmentList';
 
 function App() {
 
-  const shipmentService = new ShipmentServiceTxt();
-
   const [data, setData] = useState(() => []);
 
-  
-  console.log(shipmentService.getAllShipments());
+
+  useEffect(() => {
+    const shipmentService = new ShipmentService();
+
+    shipmentService.getAllShipments().then(result => {
+      setData(result);
+    });
+  }, []);
 
   console.log(data);
 
-  function deleteItem (id) {
-    setData(({data}) => {
-      return {
-        data: data.filter(item => item.orderNo !== id)
-      }
-    })
-  }
+function deleteItem(id) {
+  setData(prevData => prevData.filter(item => item.orderNo !== id));
+}
+  
   return (
     <div className='app'>
       <header>
