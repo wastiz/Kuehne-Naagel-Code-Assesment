@@ -1,19 +1,32 @@
 import './ShipmentListItem.scss';
+import { Row, Col, Button } from 'react-bootstrap';
 
 function ShipmentListItem(props) {
-    const {orderNo, date, customer, consignee, trackingNo, status, onDelete} = props;
+    const { orderNo, customer, consignee, date, trackingNo, status, onDelete, onShowModal } = props;
+  
+    const handleDelete = () => {
+      onDelete(orderNo);
+    };
+  
     return (
-        <li className="shipment-list-item row">
-            <p>{orderNo}</p>
-            <p>{date}</p>
-            <p>{customer}</p>
-            <p>{consignee}</p>
-            <p>{trackingNo}</p>
-            <p>{status}</p>
-            <button>update</button>
-            <button onClick={onDelete}>delete</button>
-        </li>
-    )
-}
+      <Row>
+        <Col><p>{orderNo}</p></Col>
+        <Col><p>{customer}</p></Col>
+        <Col><p>{consignee}</p></Col>
+        <Col><p>{date}</p></Col>
+        <Col><p>{trackingNo}</p></Col>
+        <Col><p>{status}</p></Col>
+        <Col>
+          <Button variant="primary" onClick={onShowModal}>
+            View Details
+          </Button>
+        </Col>
+        <Col>
+          <button onClick={handleDelete}>Delete</button>
+        </Col>
+      </Row>
+    );
+  }
+  
 
 export default ShipmentListItem;

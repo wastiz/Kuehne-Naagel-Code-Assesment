@@ -8,9 +8,7 @@ import ShipmentList from '../shipment-list/ShipmentList';
 
 
 function App() {
-
-  const [data, setData] = useState(() => []);
-
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const shipmentService = new ShipmentService();
@@ -20,12 +18,13 @@ function App() {
     });
   }, []);
 
-  console.log(data);
-
-function deleteItem(id) {
-  setData(prevData => prevData.filter(item => item.orderNo !== id));
-}
+  const deleteItem = (id) => {
+    setData(prevData => prevData.filter(item => item.orderNo !== id));
+  };
   
+  const showDetails = (id) => {
+    
+  }
   return (
     <div className='app'>
       <header>
