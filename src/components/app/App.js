@@ -21,10 +21,11 @@ function App() {
   const deleteItem = (id) => {
     setData(prevData => prevData.filter(item => item.orderNo !== id));
   };
-  
-  const showDetails = (id) => {
-    
+
+  const updateData = (updatedData) => {
+    setData([...data, updatedData]);
   }
+  
   return (
     <div className='app'>
       <header>
@@ -32,7 +33,7 @@ function App() {
       </header>
       <AppInfo/>
       <AddForm/>
-      <ShipmentList data={data} onDelete={deleteItem}/>
+      <ShipmentList data={data} onDelete={deleteItem} onUpdate={updateData}/>
     </div>
   );
 }

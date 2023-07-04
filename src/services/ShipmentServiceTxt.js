@@ -1,18 +1,28 @@
 class ShipmentServiceTxt {
-  url = './Shipments.txt';
+  url = './Shipments.json';
 
-  fetchData = async () => {
-    try {
-      const response = await fetch(this.url);
-      const text = await response.text();
-      const dataArray = text.split('\n'); 
-      return dataArray;
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      return []; 
-    }
-  };
+  constructor() {
+    this.orders = [];
+    this.isLoading = true;
+    this.error = null;
+  }
+
+  getAllShipments() {
+    return fetch(this.url)
+      .then(response => response.json())
+      .then(data => {
+        this.orders = data;
+        this.isLoading = false;
+        return this.orders;
+      })
+      .catch(error => {
+        this.error = error;
+        this.isLoading = false;
+        throw error;
+      });
+  }
 }
+
 
 export default ShipmentServiceTxt;
 

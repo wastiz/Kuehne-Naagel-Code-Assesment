@@ -1,12 +1,29 @@
 import './ShipmentList.scss';
 import ShipmentListItem from '../shipment-list-item/ShipmentListItem';
 import { Container, Row, Col, Modal, Button } from 'react-bootstrap';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
+// function useInputInfo(initialValue) {
+// 	const [value, setValue] = useState(initialValue)
+
+// 	const onChange = (e) => {
+// 		setValue({
+//       ...value,
+//       [e.target.name]: e.target.value
+//     })
+// 	}
+	
+// 	return {value, onChange}
+// }
 
 function ShipmentList(props) {
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [updateItem, setUpdateItem] = useState({});
+
+  useEffect(() => {
+    setUpdateItem(selectedItem);
+  }, [selectedItem]);
 
   const handleShowModal = (item) => {
     setSelectedItem(item);
@@ -22,7 +39,19 @@ function ShipmentList(props) {
     props.onDelete(id);
   };
 
-  const shipmentItems = props.data.map(item => (
+  const onValueChange = (e) => {
+    setUpdateItem((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleUpdate = () => {
+    props.onUpdate(updateItem);
+    handleCloseModal();
+  };
+
+  const shipmentItems = props.data.map((item) => (
     <ShipmentListItem
       key={item.orderNo}
       {...item}
@@ -32,7 +61,7 @@ function ShipmentList(props) {
   ));
 
   return (
-    <Container className='shipment-list'>
+    <Container className="shipment-list">
       <Row className="labels">
         <Col>orderNo</Col>
         <Col>customer</Col>
@@ -50,15 +79,62 @@ function ShipmentList(props) {
         </Modal.Header>
         {selectedItem && (
           <Modal.Body>
-            <p>Order No: {selectedItem.orderNo}</p>
-            <p>Customer: {selectedItem.customer}</p>
-            <p>Consignee: {selectedItem.consignee}</p>
-            <p>Date: {selectedItem.date}</p>
-            <p>Tracking No: {selectedItem.trackingNo}</p>
-            <p>Status: {selectedItem.status}</p>
+            <div className="column-view">
+              <label htmlFor="orderNo">Order No:</label>
+              <input
+                type="text"
+                value={updateItem.orderNo}
+                id="orderNo"
+                onChange={onValueChange}
+                name="orderNo"
+              />
+              <label htmlFor="customer">Customer:</label>
+              <input
+                type="text"
+                value={updateItem.customer}
+                id="customer"
+                onChange={onValueChange}
+                name="customer"
+              />
+              <label htmlFor="consignee">Consignee:</label>
+              <input
+                type="text"
+                value={updateItem.consignee}
+                id="consignee"
+                onChange={onValueChange}
+                name="consignee"
+              />
+              <label htmlFor="date">Date:</label>
+              <input
+                type="text"
+                value={updateItem.date}
+                id="date"
+                onChange={onValueChange}
+                name="date"
+              />
+              <label htmlFor="trackingNo">Tracking No:</label>
+              <input
+                type="text"
+                value={updateItem.trackingNo}
+                id="trackingNo"
+                onChange={onValueChange}
+                name="trackingNo"
+              />
+              <label htmlFor="status">Status:</label>
+              <input
+                type="text"
+                value={updateItem.status}
+                id="status"
+                onChange={onValueChange}
+                name="status"
+              />
+            </div>
           </Modal.Body>
         )}
         <Modal.Footer>
+          <Button variant="primary" onClick={handleUpdate} type="submit">
+            Update
+          </Button>
           <Button variant="secondary" onClick={handleCloseModal}>
             Close
           </Button>

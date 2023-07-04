@@ -5,9 +5,9 @@
     background-color: white;
     border-radius: 1rem;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    .labels {
-        width: 100%;
-        height: auto;
-        gap: 6%;
+    .column-view {
+        display: flex;
+        flex-direction: column;
+        gap: 1%;
     }
 }
