@@ -1,7 +1,7 @@
 import './ShipmentList.scss';
 import ShipmentListItem from '../shipment-list-item/ShipmentListItem';
 import { Container, Row, Col, Modal, Button } from 'react-bootstrap';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 // function useInputInfo(initialValue) {
 // 	const [value, setValue] = useState(initialValue)
@@ -19,14 +19,9 @@ import { useState, useEffect } from 'react';
 function ShipmentList(props) {
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
-  const [updateItem, setUpdateItem] = useState({});
-
-  useEffect(() => {
-    setUpdateItem(selectedItem);
-  }, [selectedItem]);
 
   const handleShowModal = (item) => {
-    setSelectedItem(item);
+    setSelectedItem({ ...item });
     setShowModal(true);
   };
 
@@ -39,23 +34,17 @@ function ShipmentList(props) {
     props.onDelete(id);
   };
 
-  const onValueChange = (e) => {
-    setUpdateItem((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-    console.log('render')
+  const handleUpdate = () => {
+    props.onUpdate(selectedItem, selectedItem.orderNo, props.data);
+    handleCloseModal();
   };
 
-  useEffect(() => {
-    if (selectedItem) {
-      setUpdateItem(selectedItem);
-    }
-  }, [selectedItem]);
-
-  const handleUpdate = () => {
-    props.onUpdate(updateItem, updateItem.orderNo, props.data);
-    handleCloseModal();
+  const onValueChange = (e) => {
+    const { name, value } = e.target;
+    setSelectedItem((prevItem) => ({
+      ...prevItem,
+      [name]: value,
+    }));
   };
 
   const shipmentItems = props.data.map((item) => (
@@ -70,12 +59,12 @@ function ShipmentList(props) {
   return (
     <Container className="shipment-list">
       <Row className="labels">
-        <Col>orderNo</Col>
-        <Col>customer</Col>
-        <Col>consignee</Col>
-        <Col>date</Col>
-        <Col>trackingNo</Col>
-        <Col>status</Col>
+        <Col><b>orderNo</b></Col>
+        <Col><b>customer</b></Col>
+        <Col><b>consignee</b></Col>
+        <Col><b>date</b></Col>
+        <Col><b>trackingNo</b></Col>
+        <Col><b>status</b></Col>
         <Col></Col>
         <Col></Col>
       </Row>
@@ -150,6 +139,7 @@ function ShipmentList(props) {
     </Container>
   );
 }
+
 
 
 export default ShipmentList;

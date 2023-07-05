@@ -22,10 +22,6 @@ function App() {
     setData(prevData => prevData.filter(item => item.orderNo !== id));
   };
 
-  // const updateData = (updatedData, id) => {
-  //   setData([...data, updatedData]);
-  // }
-
   const updateData = (updatedData, id, dataArray) => {
     const newArray = dataArray.map(item => {
       if (item.orderNo === id) {
@@ -39,6 +35,19 @@ function App() {
 
     setData(newArray);
   };
+
+  const addItem = (formArray) => {
+    if (formArray.orderNo === '') {
+      return false;
+    }
+    const newItem = formArray;
+    setData((prevData) => {
+      const newArr = [...prevData, newItem];
+      console.log(newArr);
+      return newArr;
+    });
+  };
+  
   
   return (
     <div className='app'>
@@ -46,7 +55,7 @@ function App() {
         <h1>Kuehne-Naagel Shipment system</h1>
       </header>
       <AppInfo/>
-      <AddForm/>
+      <AddForm onAdd={addItem}/>
       <ShipmentList data={data} onDelete={deleteItem} onUpdate={updateData}/>
     </div>
   );

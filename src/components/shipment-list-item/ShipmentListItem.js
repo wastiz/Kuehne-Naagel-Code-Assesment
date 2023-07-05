@@ -22,7 +22,7 @@ function ShipmentListItem(props) {
           </Button>
         </Col>
         <Col>
-          <Button variant="secondary" onClick={handleDelete}>
+          <Button variant="danger" onClick={handleDelete}>
             Delete
           </Button>
         </Col>
