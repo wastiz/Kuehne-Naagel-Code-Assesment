@@ -44,10 +44,17 @@ function ShipmentList(props) {
       ...prevState,
       [e.target.name]: e.target.value,
     }));
+    console.log('render')
   };
 
+  useEffect(() => {
+    if (selectedItem) {
+      setUpdateItem(selectedItem);
+    }
+  }, [selectedItem]);
+
   const handleUpdate = () => {
-    props.onUpdate(updateItem);
+    props.onUpdate(updateItem, updateItem.orderNo, props.data);
     handleCloseModal();
   };
 
@@ -83,7 +90,7 @@ function ShipmentList(props) {
               <label htmlFor="orderNo">Order No:</label>
               <input
                 type="text"
-                value={updateItem.orderNo}
+                value={selectedItem.orderNo}
                 id="orderNo"
                 onChange={onValueChange}
                 name="orderNo"
@@ -91,7 +98,7 @@ function ShipmentList(props) {
               <label htmlFor="customer">Customer:</label>
               <input
                 type="text"
-                value={updateItem.customer}
+                value={selectedItem.customer}
                 id="customer"
                 onChange={onValueChange}
                 name="customer"
@@ -99,7 +106,7 @@ function ShipmentList(props) {
               <label htmlFor="consignee">Consignee:</label>
               <input
                 type="text"
-                value={updateItem.consignee}
+                value={selectedItem.consignee}
                 id="consignee"
                 onChange={onValueChange}
                 name="consignee"
@@ -107,7 +114,7 @@ function ShipmentList(props) {
               <label htmlFor="date">Date:</label>
               <input
                 type="text"
-                value={updateItem.date}
+                value={selectedItem.date}
                 id="date"
                 onChange={onValueChange}
                 name="date"
@@ -115,7 +122,7 @@ function ShipmentList(props) {
               <label htmlFor="trackingNo">Tracking No:</label>
               <input
                 type="text"
-                value={updateItem.trackingNo}
+                value={selectedItem.trackingNo}
                 id="trackingNo"
                 onChange={onValueChange}
                 name="trackingNo"
@@ -123,7 +130,7 @@ function ShipmentList(props) {
               <label htmlFor="status">Status:</label>
               <input
                 type="text"
-                value={updateItem.status}
+                value={selectedItem.status}
                 id="status"
                 onChange={onValueChange}
                 name="status"

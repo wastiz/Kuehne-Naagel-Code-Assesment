@@ -22,9 +22,23 @@ function App() {
     setData(prevData => prevData.filter(item => item.orderNo !== id));
   };
 
-  const updateData = (updatedData) => {
-    setData([...data, updatedData]);
-  }
+  // const updateData = (updatedData, id) => {
+  //   setData([...data, updatedData]);
+  // }
+
+  const updateData = (updatedData, id, dataArray) => {
+    const newArray = dataArray.map(item => {
+      if (item.orderNo === id) {
+        console.log('Object updated successfully!');
+        return updatedData;
+      } else {
+        console.log('Object updated unsuccessfully!');
+        return item;
+      }
+    });
+
+    setData(newArray);
+  };
   
   return (
     <div className='app'>
