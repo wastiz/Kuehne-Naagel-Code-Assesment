@@ -48,13 +48,17 @@ function App() {
     });
   };
   
-  
+  const total = data.length
+  const shipped = data.filter(item => item.status === "'Shipped'").length
+  const inTransit = data.filter(item => item.status === "'In Transit'").length
+  const delivered = data.filter(item => item.status === "'Delivered'").length
+
   return (
     <div className='app'>
       <header>
         <h1>Kuehne-Naagel Shipment system</h1>
       </header>
-      <AppInfo/>
+      <AppInfo total={total} shipped={shipped} inTransit={inTransit} delivered={delivered}/>
       <AddForm onAdd={addItem}/>
       <ShipmentList data={data} onDelete={deleteItem} onUpdate={updateData}/>
     </div>

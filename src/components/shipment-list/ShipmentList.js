@@ -75,56 +75,60 @@ function ShipmentList(props) {
         </Modal.Header>
         {selectedItem && (
           <Modal.Body>
-            <div className="column-view">
-              <label htmlFor="orderNo">Order No:</label>
-              <input
-                type="text"
-                value={selectedItem.orderNo}
-                id="orderNo"
-                onChange={onValueChange}
-                name="orderNo"
-              />
-              <label htmlFor="customer">Customer:</label>
-              <input
-                type="text"
-                value={selectedItem.customer}
-                id="customer"
-                onChange={onValueChange}
-                name="customer"
-              />
-              <label htmlFor="consignee">Consignee:</label>
-              <input
-                type="text"
-                value={selectedItem.consignee}
-                id="consignee"
-                onChange={onValueChange}
-                name="consignee"
-              />
-              <label htmlFor="date">Date:</label>
-              <input
-                type="text"
-                value={selectedItem.date}
-                id="date"
-                onChange={onValueChange}
-                name="date"
-              />
-              <label htmlFor="trackingNo">Tracking No:</label>
-              <input
-                type="text"
-                value={selectedItem.trackingNo}
-                id="trackingNo"
-                onChange={onValueChange}
-                name="trackingNo"
-              />
-              <label htmlFor="status">Status:</label>
-              <input
-                type="text"
-                value={selectedItem.status}
-                id="status"
-                onChange={onValueChange}
-                name="status"
-              />
-            </div>
+            <Container>
+              <Row>
+                <Col>
+                  <label htmlFor="orderNo">Order No:</label>
+                  <input
+                    type="text"
+                    value={selectedItem.orderNo}
+                    id="orderNo"
+                    onChange={onValueChange}
+                    name="orderNo"
+                  />
+                  <label htmlFor="customer">Customer:</label>
+                  <input
+                    type="text"
+                    value={selectedItem.customer}
+                    id="customer"
+                    onChange={onValueChange}
+                    name="customer"
+                  />
+                  <label htmlFor="consignee">Consignee:</label>
+                  <input
+                    type="text"
+                    value={selectedItem.consignee}
+                    id="consignee"
+                    onChange={onValueChange}
+                    name="consignee"
+                  />
+                </Col>
+                <Col>
+                  <label htmlFor="date">Date:</label>
+                  <input
+                    type="text"
+                    value={selectedItem.date}
+                    id="date"
+                    onChange={onValueChange}
+                    name="date"
+                  />
+                  <label htmlFor="trackingNo">Tracking No:</label>
+                  <input
+                    type="text"
+                    value={selectedItem.trackingNo}
+                    id="trackingNo"
+                    onChange={onValueChange}
+                    name="trackingNo"
+                  />
+                  <label htmlFor="status">Status:</label>
+                  <select defaultValue={selectedItem.status}  placeholder="status" name="status" id="status" onChange={onValueChange}>
+                      <option value="'Shipped'">Shipped</option>
+                      <option value="'In transit'">In transit</option>
+                      <option value="'Delivered'">Delivered</option>
+                  </select>
+                </Col>
+              </Row>
+            </Container>
           </Modal.Body>
         )}
         <Modal.Footer>

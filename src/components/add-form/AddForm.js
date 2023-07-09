@@ -52,7 +52,11 @@ function AddForm(props) {
                         <label htmlFor="trackingNo">Tracking number</label> 
                         <input type="text" placeholder="trackingNo" id='trackingNo' onChange={onValueChange}/>
                         <label htmlFor="status">Status</label>
-                        <input type="text" placeholder="status" name='status' id='status' onChange={onValueChange}/>
+                        <select placeholder="status" name="status" id="status" onChange={onValueChange}>
+                            <option value="'Shipped'">Shipped</option>
+                            <option value="'In transit'">In transit</option>
+                            <option value="'Delivered'">Delivered</option>
+                        </select>
                     </div>
                 </div>
                 <br />
