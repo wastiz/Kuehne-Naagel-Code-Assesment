@@ -5,21 +5,25 @@ import ShipmentService from '../../services/ShipmentService';
 import AppInfo from '../app-info/AppInfo';
 import AddForm from '../add-form/AddForm';
 import ShipmentList from '../shipment-list/ShipmentList';
+import AppFilter from '../app-filter/AppFilter';
 
 
 function App() {
   const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
     const shipmentService = new ShipmentService();
 
     shipmentService.getAllShipments().then(result => {
       setData(result);
+      setFilteredData(result); // Set the initial filteredData
     });
   }, []);
 
   const deleteItem = (id) => {
     setData(prevData => prevData.filter(item => item.orderNo !== id));
+    setFilteredData(prevData => prevData.filter(item => item.orderNo !== id)); // Update filteredData
   };
 
   const updateData = (updatedData, id, dataArray) => {
@@ -34,6 +38,7 @@ function App() {
     });
 
     setData(newArray);
+    setFilteredData(newArray); // Update filteredData
   };
 
   const addItem = (formArray) => {
@@ -46,12 +51,20 @@ function App() {
       console.log(newArr);
       return newArr;
     });
+    setFilteredData((prevData) => {
+      const newArr = [...prevData, newItem];
+      return newArr;
+    });
   };
-  
-  const total = data.length
-  const shipped = data.filter(item => item.status === "'Shipped'").length
-  const inTransit = data.filter(item => item.status === "'In Transit'").length
-  const delivered = data.filter(item => item.status === "'Delivered'").length
+
+  const handleSearch = (filteredItems) => {
+    setFilteredData(filteredItems);
+  };
+
+  const total = data.length;
+  const shipped = data.filter(item => item.status === "'Shipped'").length;
+  const inTransit = data.filter(item => item.status === "'In Transit'").length;
+  const delivered = data.filter(item => item.status === "'Delivered'").length;
 
   return (
     <div className='app'>
@@ -60,10 +73,12 @@ function App() {
       </header>
       <AppInfo total={total} shipped={shipped} inTransit={inTransit} delivered={delivered}/>
       <AddForm onAdd={addItem}/>
-      <ShipmentList data={data} onDelete={deleteItem} onUpdate={updateData}/>
+      <AppFilter items={data} onSearch={handleSearch}/>
+      <ShipmentList data={filteredData} onDelete={deleteItem} onUpdate={updateData}/>
     </div>
   );
 }
+
 
 
 export default App;
