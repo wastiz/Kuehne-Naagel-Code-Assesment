@@ -19,8 +19,11 @@ import { useState } from 'react';
 function ShipmentList(props) {
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedModal, setSelectedModal] = useState(null);
 
-  const handleShowModal = (item) => {
+  const handleShowModal = (item, modalId) => {
+    setSelectedModal(modalId);
+    console.log(modalId);
     setSelectedItem({ ...item });
     setShowModal(true);
   };
@@ -30,8 +33,8 @@ function ShipmentList(props) {
     setShowModal(false);
   };
 
-  const handleDelete = (id) => {
-    props.onDelete(id);
+  const handleDelete = () => {
+    props.onDelete(props.data.orderNo);
   };
 
   const handleUpdate = () => {
@@ -51,7 +54,6 @@ function ShipmentList(props) {
     <ShipmentListItem
       key={item.orderNo}
       {...item}
-      onDelete={() => handleDelete(item.orderNo)}
       onShowModal={() => handleShowModal(item)}
     />
   ));
@@ -69,7 +71,7 @@ function ShipmentList(props) {
         <Col></Col>
       </Row>
       {shipmentItems}
-      <Modal show={showModal} onHide={handleCloseModal}>
+      <Modal show={showModal && selectedModal === 1} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>Shipment Details</Modal.Title>
         </Modal.Header>
@@ -138,6 +140,25 @@ function ShipmentList(props) {
           <Button variant="secondary" onClick={handleCloseModal}>
             Close
           </Button>
+        </Modal.Footer>
+      </Modal>
+      <Modal
+        show={showModal && selectedModal === 2} 
+        onHide={handleCloseModal}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Are you sure?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          There would be no chance to return order
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleDelete}>Delete</Button>
         </Modal.Footer>
       </Modal>
     </Container>

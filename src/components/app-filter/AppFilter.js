@@ -1,6 +1,7 @@
 import './AppFilter.scss';
 
 import React, { useState } from 'react';
+import { Button } from'react-bootstrap';
 
 const AppFilter = ({ items, onSearch }) => {
   const [searchKey, setSearchKey] = useState('');
@@ -41,7 +42,7 @@ const AppFilter = ({ items, onSearch }) => {
         onChange={handleSearchKeyChange}
         placeholder="Enter search keyword"
       />
-      <button onClick={handleSearch}>Search</button>
+      <Button onClick={handleSearch} variant='info'>Search</Button>
     </div>
   );
 };

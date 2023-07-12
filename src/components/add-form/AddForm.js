@@ -1,5 +1,6 @@
 import './AddForm.scss';
 import { useState } from 'react';
+import { Button } from 'react-bootstrap';
 
 function AddForm(props) {
     const [addedItem, setAddedItem] = useState({
@@ -60,7 +61,7 @@ function AddForm(props) {
                     </div>
                 </div>
                 <br />
-                <button className='form-button' type="submit" onClick={onSubmit}>Add</button>
+                <Button variant='info' type="submit" onClick={onSubmit} className='primary-button'>Add</Button>
             </form>
         </div>
     );

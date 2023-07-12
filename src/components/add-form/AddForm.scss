@@ -23,14 +23,17 @@
                 border-radius: 5px;
                 border: 0px;
             }
+            select {
+                width: 90%;
+                padding: 9px;
+                height: 40px;
+                background-color: #e5e5e5;
+                border-radius: 5px;
+                border: 0px;
+            }
         }
         .form-button {
-            width: 50px;
-            height: 40px;
             color: white;
-            background-color: #00b4d8;
-            border: none;
-            border-radius: 5px;
             font-size: 15px;
             font-weight: 600;
             &:hover {
