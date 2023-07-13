@@ -20,10 +20,11 @@ function ShipmentList(props) {
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedModal, setSelectedModal] = useState(null);
+  const [key, setKey] = useState(null);
 
-  const handleShowModal = (item, modalId) => {
-    setSelectedModal(modalId);
-    console.log(modalId);
+  const handleShowModal = (item, modalId, key) => {
+    setSelectedModal(modalId)
+    setKey(key)
     setSelectedItem({ ...item });
     setShowModal(true);
   };
@@ -34,7 +35,9 @@ function ShipmentList(props) {
   };
 
   const handleDelete = () => {
-    props.onDelete(props.data.orderNo);
+    console.log(key)
+    props.onDelete(key);
+    handleCloseModal();
   };
 
   const handleUpdate = () => {
@@ -54,7 +57,8 @@ function ShipmentList(props) {
     <ShipmentListItem
       key={item.orderNo}
       {...item}
-      onShowModal={() => handleShowModal(item)}
+      onShowModal={handleShowModal}
+      data={item}
     />
   ));
 

@@ -2,7 +2,7 @@ import './ShipmentListItem.scss';
 import { Row, Col, Button } from 'react-bootstrap';
 
 function ShipmentListItem(props) {
-  const { orderNo, customer, consignee, date, trackingNo, status, onShowModal } = props;
+  const { orderNo, customer, consignee, date, trackingNo, status, onShowModal, data} = props;
 
   return (
     <Row>
@@ -13,12 +13,12 @@ function ShipmentListItem(props) {
       <Col><p>{trackingNo}</p></Col>
       <Col><p>{status}</p></Col>
       <Col>
-        <Button variant="primary" onClick={() => onShowModal(orderNo, 1)}>
+        <Button variant="primary" onClick={() => onShowModal(data, 1)}>
           View Details
         </Button>
       </Col>
       <Col>
-        <Button variant="danger" onClick={() => onShowModal(orderNo, 2)}>
+        <Button variant="danger" onClick={() => onShowModal(data, 2, orderNo)}>
           Delete
         </Button>
       </Col>
